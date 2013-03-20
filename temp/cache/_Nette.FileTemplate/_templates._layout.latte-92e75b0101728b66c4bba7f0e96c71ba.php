@@ -1,16 +1,16 @@
-<?php //netteCache[01]000386a:2:{s:4:"time";s:21:"0.33931900 1363815134";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:64:"C:\xampp\htdocs\TwitterBootstrapTest\app\templates\@layout.latte";i:2;i:1363815128;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"0ce871c released on 2012-11-28";}}}?><?php
+<?php //netteCache[01]000386a:2:{s:4:"time";s:21:"0.70268700 1363819972";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:64:"C:\xampp\htdocs\TwitterBootstrapTest\app\templates\@layout.latte";i:2;i:1363818566;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"0ce871c released on 2012-11-28";}}}?><?php
 
 // source file: C:\xampp\htdocs\TwitterBootstrapTest\app\templates\@layout.latte
 
 ?><?php
 // prolog Nette\Latte\Macros\CoreMacros
-list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'n62u4jp1i9')
+list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, '9ej4riobm5')
 ;
 // prolog Nette\Latte\Macros\UIMacros
 //
 // block content
 //
-if (!function_exists($_l->blocks['content'][] = '_lb26e5585a5a_content')) { function _lb26e5585a5a_content($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['content'][] = '_lbc7f7dc1f50_content')) { function _lbc7f7dc1f50_content($_l, $_args) { extract($_args)
 ;
 }}
 
@@ -64,8 +64,9 @@ if ($_l->extends) {
 ><a href="<?php echo htmlSpecialChars($_control->link("Token:")) ?>">Token</a></li>
 <?php endif ?>
               
-              <li<?php if ($_l->tmp = array_filter(array($presenter->isLinkCurrent('Score:commit') ? 'active':null))) echo ' class="' . htmlSpecialChars(implode(" ", array_unique($_l->tmp))) . '"' ?>
+<?php if ($user->isLoggedIn()): ?>              <li<?php if ($_l->tmp = array_filter(array($presenter->isLinkCurrent('Score:commit') ? 'active':null))) echo ' class="' . htmlSpecialChars(implode(" ", array_unique($_l->tmp))) . '"' ?>
 ><a href="<?php echo htmlSpecialChars($_control->link("Score:commit")) ?>"><i class="icon-arrow-up"></i> Commit</a></li>
+<?php endif ?>
               
               <li<?php if ($_l->tmp = array_filter(array($presenter->isLinkCurrent('Help:') ? 'active':null))) echo ' class="' . htmlSpecialChars(implode(" ", array_unique($_l->tmp))) . '"' ?>
 ><a href="<?php echo htmlSpecialChars($_control->link("Help:")) ?>">Nápověda</a></li>

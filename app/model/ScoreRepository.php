@@ -45,9 +45,9 @@ class ScoreRepository extends Repository
         if($nodesCount < count($score))
             throw new \ZUMStats\Exceptions\TooMuchNodesException("Moc uzlu - ".$nodesCount);
         
-        $checkScore = $this->checkScore($score);
-        if($checkScore > 1)
-                    throw new \ZUMStats\Exceptions\InvalidScoreException("Nebylo pokryto ".$checkScore." uzlu.");
+        //$checkScore = $this->checkScore($score);
+        //if($checkScore > 1)
+        //            throw new \ZUMStats\Exceptions\InvalidScoreException("Nebylo pokryto ".$checkScore." uzlu.");
         
         $this->getTable()->insert(array("user_id"=>$userId, "date"=>new Nette\DateTime()));
         $scoreId = $this->connection->lastInsertId();
