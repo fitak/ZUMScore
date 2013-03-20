@@ -1,0 +1,26 @@
+{block content}
+
+<table n:ifset="$scores" class="table">
+    <tr>
+        <th>Uživatel</th>
+        <th>Výsledek</th>
+        <th>Kdy</th>
+    </tr>
+    <tr n:foreach="$scores as $score">
+        <td>{$score->ref("user_id")->name}</td>
+        <td>{$score->result}</td>
+        <td>{$score->date|date: 'j. m. Y, H:i:s'}</td>
+    </tr>
+</table>
+
+<hr>
+<div class="text-center">
+    
+
+    <div class="lead well">
+        {$baseUri}/commit/%token%/%score%
+        <hr>
+        <a href="{$basePath}/files/ScoreCommit.jar" class="btn btn-large btn-success">Stáhnout knihovnu</a>
+    </div>
+    
+</div>

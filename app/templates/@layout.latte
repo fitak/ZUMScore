@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ZUM Score</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="{$baseUri}/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="{$baseUri}/css/additional.css" rel="stylesheet">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+    </style>
+    <link href="{$baseUri}/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" media="screen">
+  </head>
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="{$baseUri}">ZUM Score</a>
+            <ul class="nav">
+              <li n:class="$presenter->isLinkCurrent('Score:list') ? active"><a href="{link Score:list}">Výsledky</a></li>
+              
+              <li n:if="$user->isLoggedIn()" n:class="$presenter->isLinkCurrent('Token:') ? active"><a href="{link Token:}">Token</a></li>
+              
+              <li n:class="$presenter->isLinkCurrent('Help:') ? active"><a href="{link Help:}">Nápověda</a></li>
+              
+            </ul>
+            
+            <div class="navbar-form pull-right" n:if="$user->isLoggedIn()">
+                <div class="btn-group">
+                  <a class="btn btn-info dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="icon-user icon"></i> {$user->getIdentity()->name}
+                    <span class="caret"></span>
+                  </a>
+                    
+                  <ul class="dropdown-menu">
+                      <li>
+                          <a href="{link Sign:out}">Odhlásit</a>
+                      </li>
+                  </ul>
+                </div>            
+
+            </div>
+          
+            <div class="navbar-form pull-right" n:if="(!$user->isLoggedIn())">
+                <a href="{link Sign:in}" class="btn btn-primary">Přihlásit</a>
+                <a href="{link Sign:activate}" class="btn">Aktivovat účet</a>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+        <div n:ifset="$flashes" id="flash-messages">
+            <div n:foreach="$flashes as $flash" class="alert alert-{$flash->type}">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                {$flash->message}
+            </div>
+        </div>
+        
+      {block #content}{/block}
+
+      <footer class="footer">
+        <p>&copy; Jan Žaloudek (zalouja4@fit.cvut.cz) 2013</p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+    
+    <script src="{$baseUri}/js/jquery.js"></script>
+    <script src="{$baseUri}/js/netteForms.js"></script>
+    <script src="{$baseUri}/bootstrap/js/bootstrap.min.js"></script>
+  </body>
+</html>

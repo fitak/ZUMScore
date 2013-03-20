@@ -1,0 +1,25 @@
+{block content}
+<div class="container">
+    <h1>Nápověda</h1>
+    <p class="lead">
+        Použití je více než snadné! Stačí k tomu pár kroků
+    </p>
+    
+    <ol>
+        <li>Aktivujte si účet a přihlašte se</li>
+        <li><a href="{$basePath}/files/ScoreCommit.jar" class="btn btn-success">Stáhnout knihovnu</a></li>
+        <li>Přidejte jí do projektu v NetBeans -> je to v Properties někde :)</li>
+        <li>Vygenerujte si na této stránce token pro komunikaci</li>
+        <li>Pro odeslání výsledku použijte následující kód<br>
+           <pre>
+                import cz.cvut.fit.zum.utils.ScoreCommit.*;
+                ...
+                ScoreCommiter sc = new ScoreCommiter(
+                                        new Token(" /* vygenerovany token */ "),
+                                        " /* adresa sluzby, je na uvodni strance */ ");
+                sc.commitScore(new Score(/* vas vysledek */));</pre>
+        
+        </li>
+        <li>A to je vse :)</li>
+    </ol>
+</div>
