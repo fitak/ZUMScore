@@ -3,13 +3,13 @@
 <table n:ifset="$scores" class="table">
     <tr>
         <th>Uživatel</th>
-        <th>Výsledek</th>
+        <th>Počet uzlů</th>
         <th>Kdy</th>
     </tr>
     <tr n:foreach="$scores as $score">
-        <td>{$score->ref("user_id")->name}</td>
-        <td>{$score->result}</td>
-        <td>{$score->date|date: 'j. m. Y, H:i:s'}</td>
+        <td>{$score->ref("score_id")->ref("user_id")->name}</td>
+        <td>{$score["count(*)"]}</td>
+        <td>{$score->ref("score_id")->date|date: 'j. m. Y, H:i:s'}</td>
     </tr>
 </table>
 
@@ -18,7 +18,7 @@
     
 
     <div class="lead well">
-        {$baseUri}/commit/%token%/%score%
+        {$baseUri}/commit/%token%/%apiversion%
         <hr>
         <a href="{$basePath}/files/ScoreCommit.jar" class="btn btn-large btn-success">Stáhnout knihovnu</a>
     </div>

@@ -1,26 +1,26 @@
-<?php //netteCache[01]000389a:2:{s:4:"time";s:21:"0.42798200 1363739276";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:67:"C:\xampp\htdocs\TwitterBootstrapTest\app\templates\Score\list.latte";i:2;i:1363739272;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"0ce871c released on 2012-11-28";}}}?><?php
+<?php //netteCache[01]000389a:2:{s:4:"time";s:21:"0.23763800 1363805347";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:67:"C:\xampp\htdocs\TwitterBootstrapTest\app\templates\Score\list.latte";i:2;i:1363802602;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"0ce871c released on 2012-11-28";}}}?><?php
 
 // source file: C:\xampp\htdocs\TwitterBootstrapTest\app\templates\Score\list.latte
 
 ?><?php
 // prolog Nette\Latte\Macros\CoreMacros
-list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'umx04nrk6g')
+list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, '54sf0bdsw8')
 ;
 // prolog Nette\Latte\Macros\UIMacros
 //
 // block content
 //
-if (!function_exists($_l->blocks['content'][] = '_lb9841c9625d_content')) { function _lb9841c9625d_content($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['content'][] = '_lb32c466117f_content')) { function _lb32c466117f_content($_l, $_args) { extract($_args)
 ;if (isset($scores)): ?><table class="table">
     <tr>
         <th>Uživatel</th>
-        <th>Výsledek</th>
+        <th>Počet uzlů</th>
         <th>Kdy</th>
     </tr>
 <?php $iterations = 0; foreach ($scores as $score): ?>    <tr>
-        <td><?php echo Nette\Templating\Helpers::escapeHtml($score->ref("user_id")->name, ENT_NOQUOTES) ?></td>
-        <td><?php echo Nette\Templating\Helpers::escapeHtml($score->result, ENT_NOQUOTES) ?></td>
-        <td><?php echo Nette\Templating\Helpers::escapeHtml($template->date($score->date, 'j. m. Y, H:i:s'), ENT_NOQUOTES) ?></td>
+        <td><?php echo Nette\Templating\Helpers::escapeHtml($score->ref("score_id")->ref("user_id")->name, ENT_NOQUOTES) ?></td>
+        <td><?php echo Nette\Templating\Helpers::escapeHtml($score["count(*)"], ENT_NOQUOTES) ?></td>
+        <td><?php echo Nette\Templating\Helpers::escapeHtml($template->date($score->ref("score_id")->date, 'j. m. Y, H:i:s'), ENT_NOQUOTES) ?></td>
     </tr>
 <?php $iterations++; endforeach ?>
 </table>
@@ -31,9 +31,9 @@ if (!function_exists($_l->blocks['content'][] = '_lb9841c9625d_content')) { func
     
 
     <div class="lead well">
-        <?php echo Nette\Templating\Helpers::escapeHtml($baseUri, ENT_NOQUOTES) ?>/commit/%token%/%score%
+        <?php echo Nette\Templating\Helpers::escapeHtml($baseUri, ENT_NOQUOTES) ?>/commit/%token%/%apiversion%
         <hr />
-        <a href="<?php echo htmlSpecialChars($basePath) ?>/files/scoreCommiter.jar" class="btn btn-large btn-success">Stáhnout knihovnu</a>
+        <a href="<?php echo htmlSpecialChars($basePath) ?>/files/ScoreCommit.jar" class="btn btn-large btn-success">Stáhnout knihovnu</a>
     </div>
     
 </div>

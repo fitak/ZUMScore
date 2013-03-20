@@ -10,6 +10,8 @@ use Nette\Application\UI;
 
 class APIPresenter extends BasePresenter
 {
+    private static $API_VERSION = 2;
+    
     /** @var ZUMStats\ScoreRepository */
     private $scoreRepository;
     
@@ -18,22 +20,55 @@ class APIPresenter extends BasePresenter
     
     /** @var ZUMStats\TokenRepository */
     private $tokenRepository;
-
+    
     protected function startup()
     {
         parent::startup();
         $this->scoreRepository = $this->context->scoreRepository;
         $this->usersRepository = $this->context->usersRepository;
         $this->tokenRepository = $this->context->tokenRepository;
+        $this->payload->apiver = 2;
     }
     
-    public function actionCommit($score, $token)
+    public function actionCommit($apiversion, $token)
     {
-        $userId = $this->tokenRepository->findBy(array("token"=>$token))->fetch();
+        if(isset($_POST['score']))
+            $score = $_POST['score'];
+        else
+        {
+            $this->payload->success = false;
+            $this->payload->message = "There is no score :(";
+        }
         
+        try {
+            $userId = $this->tokenRepository->checkToken($token, new DateInterval("P1M"));
+        } catch(ZUMStats\Exceptions\CheckLimitException $e)
+        {
+            $this->payload->success = false;
+            $this->payload->message = "You can commit only one result per minute!";
+        }
+                
         if($userId)
         {
-            $this->scoreRepository->commitScore($userId->user_id, $score);
+            $parsedScoreDecode = base64_decode($score);
+            $parsedScoreTrimmed = trim($parsedScoreDecode, "[]");
+            $tmpScoreArray = explode(",", $parsedScoreTrimmed);
+            $scoreArray = array();
+            
+            foreach($tmpScoreArray as $node)
+            {
+                array_push($scoreArray, trim($node));
+            }
+            
+            try{
+                $this->scoreRepository->commitScore($userId, $scoreArray);
+            } catch(\ZUMStats\Exceptions\ZUMException $e)
+            {
+                $this->payload->success = false;
+                $this->payload->message = $e->getMessage();
+                $this->sendPayload();
+            }
+            
             $this->payload->success = true;
             $this->payload->message = "Score saved!";
         } else {
