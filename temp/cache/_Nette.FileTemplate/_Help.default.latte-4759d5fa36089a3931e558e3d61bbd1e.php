@@ -1,16 +1,16 @@
-<?php //netteCache[01]000391a:2:{s:4:"time";s:21:"0.63951700 1363797426";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:69:"C:\xampp\htdocs\TwitterBootstrapTest\app\templates\Help\default.latte";i:2;i:1363742010;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"0ce871c released on 2012-11-28";}}}?><?php
+<?php //netteCache[01]000391a:2:{s:4:"time";s:21:"0.95818300 1363813857";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:69:"C:\xampp\htdocs\TwitterBootstrapTest\app\templates\Help\default.latte";i:2;i:1363811160;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"0ce871c released on 2012-11-28";}}}?><?php
 
 // source file: C:\xampp\htdocs\TwitterBootstrapTest\app\templates\Help\default.latte
 
 ?><?php
 // prolog Nette\Latte\Macros\CoreMacros
-list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'vqa0mdhhru')
+list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'uzf62v420l')
 ;
 // prolog Nette\Latte\Macros\UIMacros
 //
 // block content
 //
-if (!function_exists($_l->blocks['content'][] = '_lb97b04eadaf_content')) { function _lb97b04eadaf_content($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['content'][] = '_lb24fdf72d6b_content')) { function _lb24fdf72d6b_content($_l, $_args) { extract($_args)
 ?><div class="container">
     <h1>Nápověda</h1>
     <p class="lead">
@@ -19,8 +19,8 @@ if (!function_exists($_l->blocks['content'][] = '_lb97b04eadaf_content')) { func
     
     <ol>
         <li>Aktivujte si účet a přihlašte se</li>
-        <li><a href="<?php echo htmlSpecialChars($basePath) ?>/files/ScoreCommit.jar" class="btn btn-success">Stáhnout knihovnu</a></li>
-        <li>Přidejte jí do projektu v NetBeans -> je to v Properties někde :)</li>
+        <li><a href="<?php echo htmlSpecialChars($basePath) ?>/files/ScoreCommit.zip" class="btn btn-success">Stáhnout knihovnu</a></li>
+        <li>Přidejte jí do projektu (i s obsahem lib) v NetBeans -> je to v Properties někde :)</li>
         <li>Vygenerujte si na této stránce token pro komunikaci</li>
         <li>Pro odeslání výsledku použijte následující kód<br />
            <pre>
@@ -29,7 +29,10 @@ if (!function_exists($_l->blocks['content'][] = '_lb97b04eadaf_content')) { func
                 ScoreCommiter sc = new ScoreCommiter(
                                         new Token(" /* vygenerovany token */ "),
                                         " /* adresa sluzby, je na uvodni strance */ ");
-                sc.commitScore(new Score(/* vas vysledek */));</pre>
+                Score s = new Score();
+                s.addNode(nodeId); // pridejte nalezene uzly
+                ...
+                sc.commitScore(new Score()); // commit - muste vterinku pockat a v konzoli se vypise JSON odpoved</pre>
         
         </li>
         <li>A to je vse :)</li>

@@ -8,7 +8,15 @@ use Kdyby\BootstrapFormRenderer\BootstrapRenderer;
  */
 class SignPresenter extends BasePresenter
 {
+   /** @var ZUMStats\UsersRepository */
+    private $usersRepository;
 
+        protected function startup()
+        {
+            parent::startup();
+            $this->usersRepository = $this->context->usersRepository;
+        }
+        
 	public function createComponentLoginForm()
 	{
 		$form = new UI\Form();
@@ -68,9 +76,17 @@ class SignPresenter extends BasePresenter
 	{
 		$values = $form->getValues();
 
-                // TODO: Vsechna funkcionalita :-P
+                try
+                {
+                    $password = $this->usersRepository->activateAccount($values->username);
+                }
+                catch(Exception $e)
+                {
+                    $this->flashMessage("Při aktivaci se vyskytla chyba... Naprd... (".$e->getMessage().")", 'error');
+                    $this->redirect('Sign:activate');
+                }
                 
-                $this->flashMessage("Byl vám zaslán aktivační email na username@fit.cvut.cz");
+                $this->flashMessage("Vygenerované heslo: ".$password." - po přihlášení lze změnit");
                 
 		$this->redirect('Sign:in');
 	}

@@ -7,8 +7,8 @@
     
     <ol>
         <li>Aktivujte si účet a přihlašte se</li>
-        <li><a href="{$basePath}/files/ScoreCommit.jar" class="btn btn-success">Stáhnout knihovnu</a></li>
-        <li>Přidejte jí do projektu v NetBeans -> je to v Properties někde :)</li>
+        <li><a href="{$basePath}/files/ScoreCommit.zip" class="btn btn-success">Stáhnout knihovnu</a></li>
+        <li>Přidejte jí do projektu (i s obsahem lib) v NetBeans -> je to v Properties někde :)</li>
         <li>Vygenerujte si na této stránce token pro komunikaci</li>
         <li>Pro odeslání výsledku použijte následující kód<br>
            <pre>
@@ -17,7 +17,10 @@
                 ScoreCommiter sc = new ScoreCommiter(
                                         new Token(" /* vygenerovany token */ "),
                                         " /* adresa sluzby, je na uvodni strance */ ");
-                sc.commitScore(new Score(/* vas vysledek */));</pre>
+                Score s = new Score();
+                s.addNode(nodeId); // pridejte nalezene uzly
+                ...
+                sc.commitScore(new Score()); // commit - muste vterinku pockat a v konzoli se vypise JSON odpoved</pre>
         
         </li>
         <li>A to je vse :)</li>

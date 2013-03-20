@@ -38,14 +38,16 @@ class APIPresenter extends BasePresenter
         {
             $this->payload->success = false;
             $this->payload->message = "There is no score :(";
+            $this->sendPayload();
         }
         
         try {
-            $userId = $this->tokenRepository->checkToken($token, new DateInterval("P1M"));
+            $userId = $this->tokenRepository->checkToken($token, new DateInterval("PT5S"));
         } catch(ZUMStats\Exceptions\CheckLimitException $e)
         {
             $this->payload->success = false;
             $this->payload->message = "You can commit only one result per minute!";
+            $this->sendPayload();
         }
                 
         if($userId)

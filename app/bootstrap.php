@@ -30,7 +30,7 @@ $container = $configurator->createContainer();
 
 $routers = new Routers\RouteList();
 $routers[] = new Routers\Route("commit/<token>/<apiversion>", "API:commit");
-$routers[] = new Routers\Route("<presenter>/<action>/[/<id>]", "Score:list");
+$routers[] = new Routers\Route("<presenter>/<action>[/<id>]", "Score:list");
 
 $container->router = $routers;
 

@@ -1,16 +1,16 @@
-<?php //netteCache[01]000389a:2:{s:4:"time";s:21:"0.23763800 1363805347";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:67:"C:\xampp\htdocs\TwitterBootstrapTest\app\templates\Score\list.latte";i:2;i:1363802602;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"0ce871c released on 2012-11-28";}}}?><?php
+<?php //netteCache[01]000389a:2:{s:4:"time";s:21:"0.97279100 1363812877";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:67:"C:\xampp\htdocs\TwitterBootstrapTest\app\templates\Score\list.latte";i:2;i:1363812840;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"0ce871c released on 2012-11-28";}}}?><?php
 
 // source file: C:\xampp\htdocs\TwitterBootstrapTest\app\templates\Score\list.latte
 
 ?><?php
 // prolog Nette\Latte\Macros\CoreMacros
-list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, '54sf0bdsw8')
+list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'gcfnk7iycd')
 ;
 // prolog Nette\Latte\Macros\UIMacros
 //
 // block content
 //
-if (!function_exists($_l->blocks['content'][] = '_lb32c466117f_content')) { function _lb32c466117f_content($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['content'][] = '_lbf1371c8ce3_content')) { function _lbf1371c8ce3_content($_l, $_args) { extract($_args)
 ;if (isset($scores)): ?><table class="table">
     <tr>
         <th>Uživatel</th>
@@ -33,7 +33,7 @@ if (!function_exists($_l->blocks['content'][] = '_lb32c466117f_content')) { func
     <div class="lead well">
         <?php echo Nette\Templating\Helpers::escapeHtml($baseUri, ENT_NOQUOTES) ?>/commit/%token%/%apiversion%
         <hr />
-        <a href="<?php echo htmlSpecialChars($basePath) ?>/files/ScoreCommit.jar" class="btn btn-large btn-success">Stáhnout knihovnu</a>
+        <a href="<?php echo htmlSpecialChars($basePath) ?>/files/ScoreCommit.zip" class="btn btn-large btn-success">Stáhnout knihovnu</a>
     </div>
     
 </div>

@@ -25,6 +25,8 @@
               
               <li n:if="$user->isLoggedIn()" n:class="$presenter->isLinkCurrent('Token:') ? active"><a href="{link Token:}">Token</a></li>
               
+              <li n:class="$presenter->isLinkCurrent('Score:commit') ? active"><a href="{link Score:commit}"><i class="icon-arrow-up"></i> Commit</a></li>
+              
               <li n:class="$presenter->isLinkCurrent('Help:') ? active"><a href="{link Help:}">Nápověda</a></li>
               
             </ul>
@@ -37,6 +39,12 @@
                   </a>
                     
                   <ul class="dropdown-menu">
+                      <li>
+                          <a href="{link User:profile id=>$user->getId()}">Profil</a>
+                      </li>
+                      <li>
+                          <a href="{link User:password}">Změna hesla</a>
+                      </li>
                       <li>
                           <a href="{link Sign:out}">Odhlásit</a>
                       </li>
