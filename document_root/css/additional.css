@@ -37,3 +37,7 @@ padding: 7px 9px;
     text-align: right;
     padding: 15px;
 }
+
+.invalid-result {
+    text-decoration: line-through;
+}

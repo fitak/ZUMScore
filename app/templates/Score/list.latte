@@ -7,7 +7,7 @@
         <th>Kdy</th>
         <th n:if="$user->isInRole('admin')">Operace</th>
     </tr>
-    <tr n:foreach="$scores as $score" class="{if !$score->ref("score_id")->valid}error{/if}">
+    <tr n:foreach="$scores as $score" class="{if !$score->ref("score_id")->valid}error invalid-result{/if}">
         {var $score_user = $score->ref("score_id")->ref("user_id")}
         <td><a n:href="User:profile id=>$score_user->id">{$score_user->name}</a></td>
         <td>{$score["count(*)"]}</td>
