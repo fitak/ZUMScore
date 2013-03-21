@@ -45,7 +45,8 @@
             <div class="navbar-form pull-right" n:if="$user->isLoggedIn()">
                 <div class="btn-group">
                   <a class="btn btn-info dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="icon-user icon"></i> {$user->getIdentity()->name}
+                    <i class="icon-user icon"></i> <i n:if="$user->isInRole('admin')" class="icon-star icon-white"></i>
+                    {$user->getIdentity()->name}
                     <span class="caret"></span>
                   </a>
                     

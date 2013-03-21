@@ -33,6 +33,7 @@ class UserPresenter extends BasePresenter
 
     public function renderProfile($id)
     {
+        $this->template->userId = $id;
         $this->template->scores = $this->scoreRepository->findTop(NULL, $id);
     }
     

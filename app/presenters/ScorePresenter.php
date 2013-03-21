@@ -35,6 +35,20 @@ class ScorePresenter extends BasePresenter
             $this->scoreRepository->delete($id);
     }
     
+    public function actionDisplayScore($id)
+    {
+        $this->template->userId = $id;
+        if($this->getUser()->isInRole('admin') || $this->getUser()->getId() == $id)
+        {
+            $score = $this->scoreRepository->getScore($id);
+            $this->template->nodes = $score->getNodes();        
+        } else
+        {
+            $this->flashMessage("Nelze zobrazit cizí výsledek!");
+            $this->redirect("Score:");
+        }
+    }
+    
     public function renderDefault()
     {
         $this->redirect("list");

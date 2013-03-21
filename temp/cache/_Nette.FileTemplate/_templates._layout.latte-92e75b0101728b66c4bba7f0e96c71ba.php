@@ -1,16 +1,16 @@
-<?php //netteCache[01]000386a:2:{s:4:"time";s:21:"0.49310000 1363824610";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:64:"C:\xampp\htdocs\TwitterBootstrapTest\app\templates\@layout.latte";i:2;i:1363824604;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"0ce871c released on 2012-11-28";}}}?><?php
+<?php //netteCache[01]000386a:2:{s:4:"time";s:21:"0.33572700 1363891402";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:64:"C:\xampp\htdocs\TwitterBootstrapTest\app\templates\@layout.latte";i:2;i:1363891400;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"0ce871c released on 2012-11-28";}}}?><?php
 
 // source file: C:\xampp\htdocs\TwitterBootstrapTest\app\templates\@layout.latte
 
 ?><?php
 // prolog Nette\Latte\Macros\CoreMacros
-list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'rde9hhmajc')
+list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'loaokdj8bw')
 ;
 // prolog Nette\Latte\Macros\UIMacros
 //
 // block content
 //
-if (!function_exists($_l->blocks['content'][] = '_lb10c1c742c9_content')) { function _lb10c1c742c9_content($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['content'][] = '_lbbb01daef6c_content')) { function _lbbb01daef6c_content($_l, $_args) { extract($_args)
 ;
 }}
 
@@ -87,7 +87,9 @@ if ($_l->extends) {
 <?php if ($user->isLoggedIn()): ?>            <div class="navbar-form pull-right">
                 <div class="btn-group">
                   <a class="btn btn-info dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="icon-user icon"></i> <?php echo Nette\Templating\Helpers::escapeHtml($user->getIdentity()->name, ENT_NOQUOTES) ?>
+                    <i class="icon-user icon"></i> <?php if ($user->isInRole('admin')): ?><i class="icon-star icon-white"></i>
+<?php endif ?>
+                    <?php echo Nette\Templating\Helpers::escapeHtml($user->getIdentity()->name, ENT_NOQUOTES) ?>
 
                     <span class="caret"></span>
                   </a>

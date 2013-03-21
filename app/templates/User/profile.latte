@@ -4,9 +4,13 @@
             <tr>
                 <th>Počet uzlů</th>
                 <th>Kdy</th>
+                <th n:if="$user->isInRole('admin') || $user->getId() == $userId">Operace</th>
             </tr>
             <tr n:foreach="$scores as $score" class="{if !$score->ref("score_id")->valid}error{/if}">
                 <td>{$score["count(*)"]}</td>
                 <td>{$score->ref("score_id")->date|date: 'j. m. Y, H:i:s'}</td>
+                <td n:if="$user->isInRole('admin') || $user->getId() == $userId">
+                    <a class="btn btn-mini" n:href="Score:displayScore id=>$score->score_id">Uzly</a>
+                </td>
             </tr>
 </table>
