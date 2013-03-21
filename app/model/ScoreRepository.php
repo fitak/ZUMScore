@@ -7,9 +7,13 @@ use Nette;
  */
 class ScoreRepository extends Repository
 {
-    public function findTop($limit = 15)
+    public function findTop($limit = NULL, $byUser = NULL)
     {
-        return $this->connection->table('results')->select('score_id, count(*)')->group('score_id')->order('`count(*)` ASC');
+        $select = $this->connection->table('results')->select('score_id, count(*)');
+                
+        if($byUser) $select->where("score_id.user_id", $byUser);
+        
+        return $select->group('score_id')->order('`count(*)` ASC')->limit($limit);
     }
     
     protected function removeEdges($nodeId, &$edges)
@@ -27,7 +31,7 @@ class ScoreRepository extends Repository
         $fEdges = array();
         foreach($edges as $edge)
         {
-            $fEdges[] = array("from_id"=>$edge->from_id, "to_id"=>$edge->to_id);
+            $fEdges[$edge->id] = array("from_id"=>$edge->from_id, "to_id"=>$edge->to_id);
         }
         
         foreach($score as $node)
@@ -35,7 +39,7 @@ class ScoreRepository extends Repository
             $this->removeEdges($node, $fEdges);
         }
         
-        return count($fEdges);
+        return $fEdges;
     }
     
     public function commitScore($userId, $score)
@@ -45,9 +49,9 @@ class ScoreRepository extends Repository
         if($nodesCount < count($score))
             throw new \ZUMStats\Exceptions\TooMuchNodesException("Moc uzlu - ".$nodesCount);
         
-        //$checkScore = $this->checkScore($score);
-        //if($checkScore > 1)
-        //            throw new \ZUMStats\Exceptions\InvalidScoreException("Nebylo pokryto ".$checkScore." uzlu.");
+        $checkScore = $this->checkScore($score);
+        if(count($checkScore) != 0)
+                    throw new \ZUMStats\Exceptions\InvalidScoreException("Nebylo pokryto ".$checkScore." uzlu.");
         
         $this->getTable()->insert(array("user_id"=>$userId, "date"=>new Nette\DateTime()));
         $scoreId = $this->connection->lastInsertId();
@@ -59,5 +63,22 @@ class ScoreRepository extends Repository
         }
         
         $this->connection->table('results')->insert($final);
+    }
+    
+    public function changeState($id)
+    {
+        $score = $this->getTable()->get($id);
+        
+        if($score)
+        {
+            $score->update(array("valid" => (!$score->valid)));
+        }
+    }
+    
+    public function delete($id)
+    {
+        $score = $this->getTable()->get($id);
+        
+        if($score) $score->delete();
     }
 }

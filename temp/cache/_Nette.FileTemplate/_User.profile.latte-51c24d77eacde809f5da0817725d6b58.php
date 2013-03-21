@@ -1,18 +1,29 @@
-<?php //netteCache[01]000391a:2:{s:4:"time";s:21:"0.42158000 1363812017";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:69:"C:\xampp\htdocs\TwitterBootstrapTest\app\templates\User\profile.latte";i:2;i:1363811802;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"0ce871c released on 2012-11-28";}}}?><?php
+<?php //netteCache[01]000391a:2:{s:4:"time";s:21:"0.59609300 1363867976";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:69:"C:\xampp\htdocs\TwitterBootstrapTest\app\templates\User\profile.latte";i:2;i:1363867959;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"0ce871c released on 2012-11-28";}}}?><?php
 
 // source file: C:\xampp\htdocs\TwitterBootstrapTest\app\templates\User\profile.latte
 
 ?><?php
 // prolog Nette\Latte\Macros\CoreMacros
-list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'k0kl8g4lvo')
+list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'vv5dp6828u')
 ;
 // prolog Nette\Latte\Macros\UIMacros
 //
-// block content
+// block profileContent
 //
-if (!function_exists($_l->blocks['content'][] = '_lb908973fe2b_content')) { function _lb908973fe2b_content($_l, $_args) { extract($_args)
-?><h1><?php echo Nette\Templating\Helpers::escapeHtml($user->getIdentity()->name, ENT_NOQUOTES) ?></h1>
-<?php
+if (!function_exists($_l->blocks['profileContent'][] = '_lb61c79ebda7_profileContent')) { function _lb61c79ebda7_profileContent($_l, $_args) { extract($_args)
+;if (isset($scores)): ?><table class="table">
+            <tr>
+                <th>Počet uzlů</th>
+                <th>Kdy</th>
+            </tr>
+<?php $iterations = 0; foreach ($scores as $score): ?>            <tr class="<?php if (!$score->ref("score_id")->valid): ?>
+error<?php endif ?>">
+                <td><?php echo Nette\Templating\Helpers::escapeHtml($score["count(*)"], ENT_NOQUOTES) ?></td>
+                <td><?php echo Nette\Templating\Helpers::escapeHtml($template->date($score->ref("score_id")->date, 'j. m. Y, H:i:s'), ENT_NOQUOTES) ?></td>
+            </tr>
+<?php $iterations++; endforeach ?>
+</table>
+<?php endif ;
 }}
 
 //
@@ -37,4 +48,4 @@ if ($_l->extends) {
 ?>
 
 <?php if ($_l->extends) { ob_end_clean(); return Nette\Latte\Macros\CoreMacros::includeTemplate($_l->extends, get_defined_vars(), $template)->render(); }
-call_user_func(reset($_l->blocks['content']), $_l, get_defined_vars()) ; 
+call_user_func(reset($_l->blocks['profileContent']), $_l, get_defined_vars()) ; 

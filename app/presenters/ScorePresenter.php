@@ -23,6 +23,18 @@ class ScorePresenter extends BasePresenter
         $this->usersRepository = $this->context->usersRepository;
     }
     
+    public function handleChangeValidity($id)
+    {
+        if($this->getUser()->isInRole("admin"))
+            $this->scoreRepository->changeState($id);
+    }
+    
+    public function handleDelete($id)
+    {
+        if($this->getUser()->isInRole("admin"))
+            $this->scoreRepository->delete($id);
+    }
+    
     public function renderDefault()
     {
         $this->redirect("list");
@@ -30,7 +42,7 @@ class ScorePresenter extends BasePresenter
 
     public function renderList()
     {
-        $this->template->scores = $this->scoreRepository->findTop();
+        $this->template->scores = $this->scoreRepository->findTop(30);
     }
     
     protected function createComponentCommitScoreForm()

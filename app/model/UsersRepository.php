@@ -43,4 +43,12 @@ class UsersRepository extends Repository
             $user->update(array("password"=>md5($password)));
         }
     }
+    
+    public function getUserDetails($id)
+    {
+        $user = $this->getTable()->get($id);
+        unset($user->password);
+        
+        return($user);
+    }
 }

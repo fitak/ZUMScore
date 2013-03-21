@@ -1,0 +1,26 @@
+{layout ../@layout.latte}
+
+{block content}
+
+<h1 n:ifset="$username->name">{$username->name}</h1>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+
+        <div class="span2">
+            <ul class="nav nav-pills nav-stacked">
+                <li><a n:href="Score:commit">Commit</a></li>
+            </ul>    
+        </div>
+        
+        <div class="span10">
+        {block #profileContent} {/block}
+        </div>
+
+    </div>
+    
+</div>
+
+
+
+{/block}

@@ -21,6 +21,9 @@ class UserPresenter extends BasePresenter
         parent::startup();
         $this->scoreRepository = $this->context->scoreRepository;
         $this->usersRepository = $this->context->usersRepository;
+        
+        $uid = $this->getParameter('id');
+        $this->template->username = $this->usersRepository->getUserDetails($uid);
     }
     
     public function renderDefault()
@@ -30,7 +33,7 @@ class UserPresenter extends BasePresenter
 
     public function renderProfile($id)
     {
-        
+        $this->template->scores = $this->scoreRepository->findTop(NULL, $id);
     }
     
     public function renderDetail()

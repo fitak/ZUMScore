@@ -1,3 +1,12 @@
-{block content}
+{block profileContent}
 
-<h1>{$user->getIdentity()->name}</h1>
+<table n:ifset="$scores" class="table">
+            <tr>
+                <th>Počet uzlů</th>
+                <th>Kdy</th>
+            </tr>
+            <tr n:foreach="$scores as $score" class="{if !$score->ref("score_id")->valid}error{/if}">
+                <td>{$score["count(*)"]}</td>
+                <td>{$score->ref("score_id")->date|date: 'j. m. Y, H:i:s'}</td>
+            </tr>
+</table>

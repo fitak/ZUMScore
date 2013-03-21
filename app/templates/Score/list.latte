@@ -5,11 +5,21 @@
         <th>Uživatel</th>
         <th>Počet uzlů</th>
         <th>Kdy</th>
+        <th n:if="$user->isInRole('admin')">Operace</th>
     </tr>
-    <tr n:foreach="$scores as $score">
-        <td>{$score->ref("score_id")->ref("user_id")->name}</td>
+    <tr n:foreach="$scores as $score" class="{if !$score->ref("score_id")->valid}error{/if}">
+        {var $score_user = $score->ref("score_id")->ref("user_id")}
+        <td><a n:href="User:profile id=>$score_user->id">{$score_user->name}</a></td>
         <td>{$score["count(*)"]}</td>
         <td>{$score->ref("score_id")->date|date: 'j. m. Y, H:i:s'}</td>
+        <td n:if="$user->isInRole('admin')" class="text-center">
+            {if $score->ref("score_id")->valid}
+                <a class="btn btn-mini btn-warning" n:href="changeValidity! id=>$score->score_id">Invalidate</a>
+            {else}
+                <a class="btn btn-mini" n:href="changeValidity! id=>$score->score_id">Validate</a>
+            {/if}
+            <a class="btn btn-mini btn-danger" n:href="delete! id=>$score->score_id">Smazat</a>
+        </td>
     </tr>
 </table>
 

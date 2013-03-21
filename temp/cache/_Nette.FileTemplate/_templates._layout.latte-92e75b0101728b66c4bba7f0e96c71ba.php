@@ -1,16 +1,16 @@
-<?php //netteCache[01]000386a:2:{s:4:"time";s:21:"0.70268700 1363819972";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:64:"C:\xampp\htdocs\TwitterBootstrapTest\app\templates\@layout.latte";i:2;i:1363818566;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"0ce871c released on 2012-11-28";}}}?><?php
+<?php //netteCache[01]000386a:2:{s:4:"time";s:21:"0.49310000 1363824610";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:64:"C:\xampp\htdocs\TwitterBootstrapTest\app\templates\@layout.latte";i:2;i:1363824604;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"0ce871c released on 2012-11-28";}}}?><?php
 
 // source file: C:\xampp\htdocs\TwitterBootstrapTest\app\templates\@layout.latte
 
 ?><?php
 // prolog Nette\Latte\Macros\CoreMacros
-list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, '9ej4riobm5')
+list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'rde9hhmajc')
 ;
 // prolog Nette\Latte\Macros\UIMacros
 //
 // block content
 //
-if (!function_exists($_l->blocks['content'][] = '_lbc7f7dc1f50_content')) { function _lbc7f7dc1f50_content($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['content'][] = '_lb10c1c742c9_content')) { function _lb10c1c742c9_content($_l, $_args) { extract($_args)
 ;
 }}
 
@@ -71,6 +71,17 @@ if ($_l->extends) {
               <li<?php if ($_l->tmp = array_filter(array($presenter->isLinkCurrent('Help:') ? 'active':null))) echo ' class="' . htmlSpecialChars(implode(" ", array_unique($_l->tmp))) . '"' ?>
 ><a href="<?php echo htmlSpecialChars($_control->link("Help:")) ?>">Nápověda</a></li>
               
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  GitHub
+                  <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="https://github.com/janzal/ZUMScore">Repozitář</a></li>
+                    <li><a href="https://github.com/janzal/ZUMScore/issues">Issue tracker</a></li>
+                </ul>
+              </li>
+              
             </ul>
             
 <?php if ($user->isLoggedIn()): ?>            <div class="navbar-form pull-right">
@@ -123,7 +134,7 @@ call_user_func(reset($_l->blocks['content']), $_l, get_defined_vars())  ?>
 
 
       <footer class="footer">
-        <p>&copy; Jan Žaloudek (zalouja4@fit.cvut.cz) 2013</p>
+        <p>&copy; BI-ZUM 2013</p>
       </footer>
 
     </div> <!-- /container -->
