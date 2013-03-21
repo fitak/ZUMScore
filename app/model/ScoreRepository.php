@@ -70,7 +70,7 @@ class ScoreRepository extends Repository
         $nodes = $this->connection->table('results')->select('node_id')->where('score_id', $id);
         $score = $this->getTable()->get($id);
 
-        return new \ZUMStats\Score($score, $nodes);
+        return new Score($score, $nodes);
     }
     
     public function changeState($id)
