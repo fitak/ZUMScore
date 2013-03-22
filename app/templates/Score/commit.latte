@@ -7,7 +7,15 @@
                   Tip pro jednodušší zpracování - knihovna přímo do aplikace!
                   <a class="btn btn-large btn-success" href="{link Help:}">Knihovna</a>
           </div>
+        
+        <div n:ifset="$uncoveredEdges" class="alert alert-error">
+            <h4>Nepokryté uzly</h4>
+            {foreach $uncoveredEdges as $key=>$edge}
+                {$key}{if !$iterator->isLast()},{/if}
+            {/foreach}
+        </div>
             {control commitScoreForm}
+        
         </div>
        
   </div>

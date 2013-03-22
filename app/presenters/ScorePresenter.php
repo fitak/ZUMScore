@@ -88,7 +88,14 @@ class ScorePresenter extends BasePresenter
             
             try{
                 $this->scoreRepository->commitScore($this->getUser()->getId(), $scoreArray);
-            } catch(\ZUMStats\Exceptions\ZUMException $e)
+            }
+            catch(\ZUMStats\Exceptions\InvalidScoreException $e)
+            {
+                $this->flashMessage($e->getMessage(), "error");
+                $this->template->uncoveredEdges = $e->getUncoveredEdges();
+                return;
+            }
+            catch(\ZUMStats\Exceptions\ZUMException $e)
             {
                 $this->flashMessage($e->getMessage(), "error");
                 return;
