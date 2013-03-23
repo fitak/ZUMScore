@@ -1,16 +1,16 @@
-<?php //netteCache[01]000389a:2:{s:4:"time";s:21:"0.42395600 1363890223";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:67:"C:\xampp\htdocs\TwitterBootstrapTest\app\templates\Score\list.latte";i:2;i:1363890220;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"0ce871c released on 2012-11-28";}}}?><?php
+<?php //netteCache[01]000389a:2:{s:4:"time";s:21:"0.89118000 1363912279";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:67:"C:\xampp\htdocs\TwitterBootstrapTest\app\templates\Score\list.latte";i:2;i:1363908317;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"0ce871c released on 2012-11-28";}}}?><?php
 
 // source file: C:\xampp\htdocs\TwitterBootstrapTest\app\templates\Score\list.latte
 
 ?><?php
 // prolog Nette\Latte\Macros\CoreMacros
-list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'g6t8qfav34')
+list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, '9t6ihgur3t')
 ;
 // prolog Nette\Latte\Macros\UIMacros
 //
 // block content
 //
-if (!function_exists($_l->blocks['content'][] = '_lb2b82f8811e_content')) { function _lb2b82f8811e_content($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['content'][] = '_lb6c07adb606_content')) { function _lb6c07adb606_content($_l, $_args) { extract($_args)
 ;if (isset($scores)): ?><table class="table">
     <tr>
         <th>Uživatel</th>
@@ -20,7 +20,7 @@ if (!function_exists($_l->blocks['content'][] = '_lb2b82f8811e_content')) { func
 <?php endif ?>
     </tr>
 <?php $iterations = 0; foreach ($scores as $score): ?>    <tr class="<?php if (!$score->ref("score_id")->valid): ?>
-error<?php endif ?>">
+error invalid-result<?php endif ?>">
 <?php $score_user = $score->ref("score_id")->ref("user_id") ?>
         <td><a href="<?php echo htmlSpecialChars($_control->link("User:profile", array('id'=>$score_user->id))) ?>
 "><?php echo Nette\Templating\Helpers::escapeHtml($score_user->name, ENT_NOQUOTES) ?></a></td>
