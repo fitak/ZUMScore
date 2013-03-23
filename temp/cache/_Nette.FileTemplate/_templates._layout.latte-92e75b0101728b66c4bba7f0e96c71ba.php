@@ -1,16 +1,16 @@
-<?php //netteCache[01]000386a:2:{s:4:"time";s:21:"0.33572700 1363891402";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:64:"C:\xampp\htdocs\TwitterBootstrapTest\app\templates\@layout.latte";i:2;i:1363891400;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"0ce871c released on 2012-11-28";}}}?><?php
+<?php //netteCache[01]000386a:2:{s:4:"time";s:21:"0.61661700 1364051577";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:64:"C:\xampp\htdocs\TwitterBootstrapTest\app\templates\@layout.latte";i:2;i:1364051536;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"0ce871c released on 2012-11-28";}}}?><?php
 
 // source file: C:\xampp\htdocs\TwitterBootstrapTest\app\templates\@layout.latte
 
 ?><?php
 // prolog Nette\Latte\Macros\CoreMacros
-list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'loaokdj8bw')
+list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'msdz21j6o4')
 ;
 // prolog Nette\Latte\Macros\UIMacros
 //
 // block content
 //
-if (!function_exists($_l->blocks['content'][] = '_lbbb01daef6c_content')) { function _lbbb01daef6c_content($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['content'][] = '_lbbbdf86ad09_content')) { function _lbbbdf86ad09_content($_l, $_args) { extract($_args)
 ;
 }}
 
@@ -49,6 +49,9 @@ if ($_l->extends) {
       }
     </style>
     <link href="<?php echo htmlSpecialChars($baseUri) ?>/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" media="screen" />
+    <script src="<?php echo htmlSpecialChars($baseUri) ?>/js/main.js" type="text/javascript"></script>
+    <script src="<?php echo htmlSpecialChars($baseUri) ?>/js/main.js" type="text/javascript"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
   </head>
   <body>
 

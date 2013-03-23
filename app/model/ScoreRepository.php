@@ -7,13 +7,29 @@ use Nette;
  */
 class ScoreRepository extends Repository
 {
-    public function findTop($limit = NULL, $byUser = NULL)
+    public function getUserResults($byUser = NULL, $limit = NULL)
     {
         $select = $this->connection->table('results')->select('score_id, count(*)');
-                
+                       
         if($byUser) $select->where("score_id.user_id", $byUser);
         
-        return $select->group('score_id')->order('`count(*)` ASC')->limit($limit);
+        $select = $select->group('score_id')->order('`count(*)` ASC');
+                
+        return $select->limit($limit);        
+    }
+    
+    public function findTop($limit = NULL, $byUser = NULL)
+    {        
+        // OH DEAR, THIS IS AWFUL PIECE OF SHIT!
+        $result = $this->connection->query("select *, min(sub_nodes_count) as min_nodes_count ".
+                    "from (select score_id, count(*) as sub_nodes_count ".
+                    "from results sr group by score_id) tr left join score s on tr.score_id = s.id ".
+                    "left join users on s.user_id = users.id group by user_id");
+        
+        //unset($result->password);
+        
+        return $result;
+    
     }
     
     protected function removeEdges($nodeId, &$edges)

@@ -1,17 +1,33 @@
-<?php //netteCache[01]000391a:2:{s:4:"time";s:21:"0.04888300 1363891463";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:69:"C:\xampp\htdocs\TwitterBootstrapTest\app\templates\User\profile.latte";i:2;i:1363891458;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"0ce871c released on 2012-11-28";}}}?><?php
+<?php //netteCache[01]000391a:2:{s:4:"time";s:21:"0.99726700 1364055377";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:69:"C:\xampp\htdocs\TwitterBootstrapTest\app\templates\User\profile.latte";i:2;i:1364055376;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"0ce871c released on 2012-11-28";}}}?><?php
 
 // source file: C:\xampp\htdocs\TwitterBootstrapTest\app\templates\User\profile.latte
 
 ?><?php
 // prolog Nette\Latte\Macros\CoreMacros
-list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'wbiv3qgt0b')
+list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'zixil6jt8m')
 ;
 // prolog Nette\Latte\Macros\UIMacros
 //
 // block profileContent
 //
-if (!function_exists($_l->blocks['profileContent'][] = '_lb14fbe3273f_profileContent')) { function _lb14fbe3273f_profileContent($_l, $_args) { extract($_args)
-;if (isset($scores)): ?><table class="table">
+if (!function_exists($_l->blocks['profileContent'][] = '_lb17e034bc8e_profileContent')) { function _lb17e034bc8e_profileContent($_l, $_args) { extract($_args)
+?><div class="big-chart" id="chart_div">
+</div>
+
+<script type="text/javascript">
+      var data = [
+          ['Čas', 'Uzlů'],
+<?php $iterations = 0; foreach ($iterator = $_l->its[] = new Nette\Iterators\CachingIterator($scores) as $score): ?>
+                [<?php echo Nette\Templating\Helpers::escapeJs($template->date($score->ref("score_id")->date, 'j. m., H:i')) ?>,
+                <?php echo Nette\Templating\Helpers::escapeJs($score["count(*)"]) ?>
+]<?php if (!$iterator->isLast()): ?>,<?php endif ?>
+
+<?php $iterations++; endforeach; array_pop($_l->its); $iterator = end($_l->its) ?>
+        ];
+        prepareChart('Historie úspěšnosti','Čas',data);
+</script>
+
+<?php if (isset($scores)): ?><table class="table">
             <tr>
                 <th>Počet uzlů</th>
                 <th>Kdy</th>
