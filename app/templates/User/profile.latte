@@ -1,5 +1,16 @@
 {block profileContent}
-
+{block chart}
+    <div class="big-chart" id="chart_div"></div>
+{/block}
+<script type="text/javascript">
+      var data = [
+          ['Čas', 'Uzlů'],
+          {foreach $scores as $score}
+                [{$score->ref("score_id")->date|date: 'j. m., H:i'},{$score["count(*)"]}]{if $iterations != count($scores)-1},{/if}
+          {/foreach}
+        ];
+        prepareChart('Historie úspěšnosti','Čas',data);
+</script>
 <table n:ifset="$scores" class="table">
             <tr>
                 <th>Počet uzlů</th>
