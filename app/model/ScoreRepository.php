@@ -24,7 +24,7 @@ class ScoreRepository extends Repository
         $result = $this->connection->query("select *, min(sub_nodes_count) as min_nodes_count ".
                     "from (select score_id, count(*) as sub_nodes_count ".
                     "from results sr group by score_id) tr left join score s on tr.score_id = s.id ".
-                    "left join users on s.user_id = users.id group by user_id");
+                    "left join users on s.user_id = users.id group by user_id order by min_nodes_count");
         
         //unset($result->password);
         
