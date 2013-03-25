@@ -93,6 +93,7 @@ class APIPresenter extends BasePresenter
                 $this->scoreRepository->commitScore($userId, $scoreArray);
             } catch(\ZUMStats\Exceptions\ZUMException $e)
             {
+                \Nette\Diagnostics\Debugger::log("User: ".$this->usersRepository->getUserDetails($userId)->name." - ".$e->getMessage());
                 $this->payload->success = false;
                 $this->payload->message = $e->getMessage();
                 $this->sendPayload();
@@ -101,6 +102,7 @@ class APIPresenter extends BasePresenter
             $this->payload->success = true;
             $this->payload->message = "Score saved!";
         } else {
+            \Nette\Diagnostics\Debugger::log($token." - invalid token");
             $this->payload->success = false;
             $this->payload->message = "Token is invalid (".$score.", ".$token.")";
         }

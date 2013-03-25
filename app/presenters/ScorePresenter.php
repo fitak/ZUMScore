@@ -100,12 +100,14 @@ class ScorePresenter extends BasePresenter
             }
             catch(\ZUMStats\Exceptions\InvalidScoreException $e)
             {
+                \Nette\Diagnostics\Debugger::log("User: ".$this->getUser()->getIdentity()->name." - ".$e->getMessage());                
                 $this->flashMessage($e->getMessage(), "error");
                 $this->template->uncoveredEdges = $e->getUncoveredEdges();
                 return;
             }
             catch(\ZUMStats\Exceptions\ZUMException $e)
             {
+                \Nette\Diagnostics\Debugger::log("User: ".$this->getUser()->getIdentity()->name." - ".$e->getMessage());
                 $this->flashMessage($e->getMessage(), "error");
                 return;
             }    
