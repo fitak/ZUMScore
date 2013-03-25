@@ -1,3 +1,4 @@
 /app/config/*
 /temp/*
 /log/*
+/document_root/
