@@ -1,4 +1,16 @@
 {block content}
+<div class="big-chart" id="chart_div">
+</div>
+<script type="text/javascript">
+      var data = [
+          ['Čas', {foreach $chart['users'] as $u}{$u}{sep},{/sep}{/foreach}],
+          {foreach $chart['times'] as $time}
+                [{Date('j.n. H\h',$time['date'])},{foreach $time['scores'] as $score}{!$score}{sep},{/sep}{/foreach}]
+                {sep},{/sep}
+          {/foreach}
+        ];
+        prepareChart('Výsledky','Čas',data);
+</script>
 <table n:ifset="$scores" class="table">
     <tr>
         <th>Uživatel</th>

@@ -41,3 +41,7 @@ padding: 7px 9px;
 .invalid-result {
     text-decoration: line-through;
 }
+.big-chart {
+    height: 300px;
+    margin-bottom: 20px;
+}

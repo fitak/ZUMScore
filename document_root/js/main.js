@@ -12,10 +12,11 @@ function drawChart(title, axisTitle, data) {
         title: title,
         interpolateNulls : true,
         hAxis: {
-            title: axisTitle
+            title: axisTitle,
+            showTextEvery : 3
         }
     };
 
-    var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+    var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
     chart.draw(dataTable, options);
 }
