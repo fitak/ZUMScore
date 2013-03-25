@@ -59,6 +59,15 @@ class ScorePresenter extends BasePresenter
         $this->template->scores = $this->scoreRepository->findTop(30);
     }
     
+    public function actionCommit()
+    {
+        if(!$this->getUser()->isLoggedIn())
+        {
+            $this->flashMessage("Pro commit výsledku se musíte přihlásit.");
+            $this->redirect ("Sign:in");
+        }
+    }
+    
     protected function createComponentCommitScoreForm()
     {
         $form = new UI\Form();

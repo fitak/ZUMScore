@@ -1,17 +1,21 @@
-<?php //netteCache[01]000389a:2:{s:4:"time";s:21:"0.47075600 1364055113";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:67:"C:\xampp\htdocs\TwitterBootstrapTest\app\templates\Score\list.latte";i:2;i:1364055111;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"0ce871c released on 2012-11-28";}}}?><?php
+<?php //netteCache[01]000389a:2:{s:4:"time";s:21:"0.03078700 1364204148";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:67:"C:\xampp\htdocs\TwitterBootstrapTest\app\templates\Score\list.latte";i:2;i:1364204146;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"0ce871c released on 2012-11-28";}}}?><?php
 
 // source file: C:\xampp\htdocs\TwitterBootstrapTest\app\templates\Score\list.latte
 
 ?><?php
 // prolog Nette\Latte\Macros\CoreMacros
-list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'x9otb7ldnt')
+list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, '4gqnznxmtm')
 ;
 // prolog Nette\Latte\Macros\UIMacros
 //
 // block content
 //
-if (!function_exists($_l->blocks['content'][] = '_lbebe8a46439_content')) { function _lbebe8a46439_content($_l, $_args) { extract($_args)
-;if (isset($scores)): ?><table class="table">
+if (!function_exists($_l->blocks['content'][] = '_lbb0f7feda36_content')) { function _lbb0f7feda36_content($_l, $_args) { extract($_args)
+?><div class="alert alert-info">
+    Na server byla nahrána nová mapa ostrova, takže původní výsledky byly smazány. Teď se jede naostro :)
+</div>
+
+<?php if (isset($scores)): ?><table class="table">
     <tr>
         <th>Uživatel</th>
         <th>Počet uzlů</th>
@@ -19,9 +23,11 @@ if (!function_exists($_l->blocks['content'][] = '_lbebe8a46439_content')) { func
 <?php if ($user->isInRole('admin')): ?>        <th>Operace</th>
 <?php endif ?>
     </tr>
-<?php $iterations = 0; foreach ($scores as $score): ?>    <tr class="<?php if (!$score->valid): ?>
-error invalid-result<?php endif ?>">
-        <td><a href="<?php echo htmlSpecialChars($_control->link("User:profile", array('id'=>$score->user_id))) ?>
+<?php $iterations = 0; foreach ($iterator = $_l->its[] = new Nette\Iterators\CachingIterator($scores) as $score): ?>
+    <tr class="<?php if (!$score->valid): ?>error invalid-result<?php endif ?>">
+        <td><span class="badge <?php if ($iterator->isFirst()): ?>badge-success<?php endif ?>
+"><?php echo Nette\Templating\Helpers::escapeHtml($iterator->getCounter(), ENT_NOQUOTES) ?>
+</span> <a href="<?php echo htmlSpecialChars($_control->link("User:profile", array('id'=>$score->user_id))) ?>
 "><?php echo Nette\Templating\Helpers::escapeHtml($score->name, ENT_NOQUOTES) ?></a></td>
         <td><?php echo Nette\Templating\Helpers::escapeHtml($score->min_nodes_count, ENT_NOQUOTES) ?></td>
         <td><?php echo Nette\Templating\Helpers::escapeHtml($template->date($score->date, 'j. m. Y, H:i:s'), ENT_NOQUOTES) ?></td>
@@ -40,14 +46,12 @@ error invalid-result<?php endif ?>">
         </td>
 <?php endif ?>
     </tr>
-<?php $iterations++; endforeach ?>
+<?php $iterations++; endforeach; array_pop($_l->its); $iterator = end($_l->its) ?>
 </table>
 <?php endif ?>
 
 <hr />
 <div class="text-center">
-    
-
     <div class="lead well">
         <?php echo Nette\Templating\Helpers::escapeHtml($baseUri, ENT_NOQUOTES) ?>/commit/%token%/%apiversion%
         <hr />
