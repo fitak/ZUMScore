@@ -56,7 +56,16 @@ class ScorePresenter extends BasePresenter
 
     public function renderList()
     {
-        $this->template->scores = $this->scoreRepository->findTop(30);
+        $top = $this->scoreRepository->findTop(30);
+        $userCount = 5;
+        $users = array();
+        $top_users = $top->fetchAll();
+        foreach($top_users as $score) {
+            $users[] = $score->name;
+            if($userCount == count($users)) break;
+        }
+        $this->template->scores = $top_users;
+        $this->template->chart = $this->scoreRepository->findTimeStats($users,30,5);
     }
     
     public function actionCommit()

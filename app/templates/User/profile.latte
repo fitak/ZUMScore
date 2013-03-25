@@ -6,9 +6,9 @@
 <script type="text/javascript">
       var data = [
           ['Čas', 'Uzlů'],
-          {foreach $scores as $score}
+          {foreach $chart as $score}
                 [{$score->ref("score_id")->date|date: 'j. m., H:i'},
-                {$score["count(*)"]}]{if !$iterator->isLast()},{/if}
+                {$score["count(*)"]}]{sep},{/sep}
           {/foreach}
         ];
         prepareChart('Historie úspěšnosti','Čas',data);
