@@ -9,7 +9,7 @@
           </div>
         
         <div n:ifset="$uncoveredEdges" class="alert alert-error">
-            <h4>Nepokryté uzly</h4>
+            <h4>Nepokryté hrany</h4>
             {foreach $uncoveredEdges as $key=>$edge}
                 {$key}{if !$iterator->isLast()},{/if}
             {/foreach}

@@ -67,7 +67,7 @@ class ScoreRepository extends Repository
         
         $checkScore = $this->checkScore($score);
         if(count($checkScore) != 0)
-                    throw new \ZUMStats\Exceptions\InvalidScoreException("Nebylo pokryto ".count($checkScore)." uzlu.", $checkScore);
+                    throw new \ZUMStats\Exceptions\InvalidScoreException("Nebylo pokryto ".count($checkScore)." hran.", $checkScore);
         
         $this->getTable()->insert(array("user_id"=>$userId, "date"=>new Nette\DateTime()));
         $scoreId = $this->connection->lastInsertId();
