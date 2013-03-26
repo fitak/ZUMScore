@@ -1,10 +1,4 @@
 {block content}
-
-<div class="alert alert-info">
-    Na server byla nahrána nová mapa ostrova, takže původní výsledky byly smazány. Teď se jede naostro :)
-</div>
-
-
 <div class="big-chart" id="chart_div">
 </div>
 <script type="text/javascript">
@@ -17,7 +11,6 @@
         ];
         prepareChart('Výsledky','Čas',data);
 </script>
-
 <table n:ifset="$scores" class="table">
     <tr>
         <th>Uživatel</th>
@@ -26,7 +19,7 @@
         <th n:if="$user->isInRole('admin')">Operace</th>
     </tr>
     <tr n:foreach="$scores as $score" class="{if !$score->valid}error invalid-result{/if}">
-        <td><span class="badge {if $iterator->isFirst()}badge-success{/if}">{$iterator->getCounter()}</span> <a n:href="User:profile id=>$score->user_id">{$score->name}</a></td>
+        <td><a n:href="User:profile id=>$score->user_id">{$score->name}</a></td>
         <td>{$score->min_nodes_count}</td>
         <td>{$score->date|date: 'j. m. Y, H:i:s'}</td>
         <td n:if="$user->isInRole('admin')" class="text-center">
@@ -43,6 +36,8 @@
 
 <hr>
 <div class="text-center">
+    
+
     <div class="lead well">
         {$baseUri}/commit/%token%/%apiversion%
         <hr>

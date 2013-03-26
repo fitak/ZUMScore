@@ -30,33 +30,6 @@ class APIPresenter extends BasePresenter
         $this->payload->apiver = 2;
     }
     
-    public function actionGetMyBest($apiversion, $token)
-    {
-        try {
-            $userId = $this->tokenRepository->checkToken($token);
-        } catch(ZUMStats\Exceptions\CheckLimitException $e)
-        {
-            $this->payload->success = false;
-            $this->payload->message = "You can commit only one result per minute!";
-            $this->sendPayload();
-        }
-        
-        $this->payload->success=false;
-        if($userId)
-        {
-            $result = $this->scoreRepository->getUserResults($userId, 1)->fetch();
-            if($result)
-            {
-                $this->payload->score = $result['count(*)'];
-                $this->payload->success = true;
-            } else
-            {
-                $this->payload->message = "Cannot retrieve score.";
-            }
-        }
-        $this->sendPayload();
-    }
-    
     public function actionCommit($apiversion, $token)
     {
         if(isset($_POST['score']))
@@ -69,7 +42,7 @@ class APIPresenter extends BasePresenter
         }
         
         try {
-            $userId = $this->tokenRepository->checkToken($token);
+            $userId = $this->tokenRepository->checkToken($token, new DateInterval("PT5S"));
         } catch(ZUMStats\Exceptions\CheckLimitException $e)
         {
             $this->payload->success = false;
@@ -93,7 +66,6 @@ class APIPresenter extends BasePresenter
                 $this->scoreRepository->commitScore($userId, $scoreArray);
             } catch(\ZUMStats\Exceptions\ZUMException $e)
             {
-                \Nette\Diagnostics\Debugger::log("User: ".$this->usersRepository->getUserDetails($userId)->name." - ".$e->getMessage());
                 $this->payload->success = false;
                 $this->payload->message = $e->getMessage();
                 $this->sendPayload();
@@ -102,7 +74,6 @@ class APIPresenter extends BasePresenter
             $this->payload->success = true;
             $this->payload->message = "Score saved!";
         } else {
-            \Nette\Diagnostics\Debugger::log($token." - invalid token");
             $this->payload->success = false;
             $this->payload->message = "Token is invalid (".$score.", ".$token.")";
         }

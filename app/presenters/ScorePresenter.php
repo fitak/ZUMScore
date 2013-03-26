@@ -68,15 +68,6 @@ class ScorePresenter extends BasePresenter
         $this->template->chart = $this->scoreRepository->findTimeStats($users,30,5);
     }
     
-    public function actionCommit()
-    {
-        if(!$this->getUser()->isLoggedIn())
-        {
-            $this->flashMessage("Pro commit výsledku se musíte přihlásit.");
-            $this->redirect ("Sign:in");
-        }
-    }
-    
     protected function createComponentCommitScoreForm()
     {
         $form = new UI\Form();
@@ -109,14 +100,12 @@ class ScorePresenter extends BasePresenter
             }
             catch(\ZUMStats\Exceptions\InvalidScoreException $e)
             {
-                \Nette\Diagnostics\Debugger::log("User: ".$this->getUser()->getIdentity()->name." - ".$e->getMessage());                
                 $this->flashMessage($e->getMessage(), "error");
                 $this->template->uncoveredEdges = $e->getUncoveredEdges();
                 return;
             }
             catch(\ZUMStats\Exceptions\ZUMException $e)
             {
-                \Nette\Diagnostics\Debugger::log("User: ".$this->getUser()->getIdentity()->name." - ".$e->getMessage());
                 $this->flashMessage($e->getMessage(), "error");
                 return;
             }    
