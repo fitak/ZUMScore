@@ -137,7 +137,7 @@ class Form extends Container
 	/**
 	 * This method will be called when the component (or component's parent)
 	 * becomes attached to a monitored object. Do not call this method yourself.
-	 * @param  IComponent
+	 * @param  Nette\ComponentModel\IComponent
 	 * @return void
 	 */
 	protected function attached($obj)
@@ -277,7 +277,7 @@ class Form extends Container
 		}
 
 		foreach ($group->getControls() as $control) {
-			$this->removeComponent($control);
+			$control->getParent()->removeComponent($control);
 		}
 
 		unset($this->groups[$name]);
@@ -357,8 +357,7 @@ class Form extends Container
 	final public function isSubmitted()
 	{
 		if ($this->submittedBy === NULL && count($this->getControls())) {
-			$this->getHttpData();
-			$this->submittedBy = $this->httpData !== NULL;
+			$this->submittedBy = (bool) $this->getHttpData();
 		}
 		return $this->submittedBy;
 	}
@@ -453,7 +452,7 @@ class Form extends Container
 	{
 		$httpRequest = $this->getHttpRequest();
 		if (strcasecmp($this->getMethod(), $httpRequest->getMethod())) {
-			return;
+			return array();
 		}
 
 		if ($httpRequest->isMethod('post')) {
@@ -464,7 +463,7 @@ class Form extends Container
 
 		if ($tracker = $this->getComponent(self::TRACKER_ID, FALSE)) {
 			if (!isset($data[self::TRACKER_ID]) || $data[self::TRACKER_ID] !== $tracker->getValue()) {
-				return;
+				return array();
 			}
 		}
 

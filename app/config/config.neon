@@ -1,0 +1,30 @@
+#
+# SECURITY WARNING: it is CRITICAL that this file & directory are NOT accessible directly via a web browser!
+common:
+	php:
+		date.timezone: Europe/Prague
+
+	nette:
+		application:
+			errorPresenter: Error
+
+		database:
+			reflection: discovered
+
+		session:
+			expiration: 14 days
+
+	services:
+		authenticator: Authenticator
+		routerFactory: RouterFactory
+		router: @routerFactory::createRouter
+		scoreRepository: ZUMStats\ScoreRepository
+		usersRepository: ZUMStats\UsersRepository
+		tokenRepository: ZUMStats\TokenRepository
+
+production < common:
+	includes:
+		- config.product.neon
+development < common:
+	includes:
+		- config.local.neon
