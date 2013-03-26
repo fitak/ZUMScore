@@ -47,6 +47,8 @@ class NetteLoader extends AutoLoader
 		'Nette\Callback' => '/common/Callback',
 		'Nette\DI\MissingServiceException' => '/DI/exceptions',
 		'Nette\DI\ServiceCreationException' => '/DI/exceptions',
+		'Nette\Database\Reflection\AmbiguousReferenceKeyException' => '/Database/Reflection/exceptions',
+		'Nette\Database\Reflection\MissingReferenceException' => '/Database/Reflection/exceptions',
 		'Nette\DateTime' => '/common/DateTime',
 		'Nette\DeprecatedException' => '/common/exceptions',
 		'Nette\DirectoryNotFoundException' => '/common/exceptions',
