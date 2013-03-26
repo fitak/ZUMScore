@@ -1,6 +1,7 @@
 <?php
 
 use Nette\Application\UI;
+use Nette\Caching\Cache;
 
 /**
  * Description of ScorePresenter
@@ -56,16 +57,18 @@ class ScorePresenter extends BasePresenter
 
     public function renderList()
     {
-        $top = $this->scoreRepository->findTop(30);
-        $userCount = 5;
-        $users = array();
-        $top_users = $top->fetchAll();
-        foreach($top_users as $score) {
-            $users[] = $score->name;
-            if($userCount == count($users)) break;
-        }
-        $this->template->scores = $top_users;
-        $this->template->chart = $this->scoreRepository->findTimeStats($users,30,5);
+        $this->template->scores = $this->scoreRepository->findTop(30)->fetchAll();
+
+        $cache = new Cache($this->context->cacheStorage, 'graf');
+        $scoreRepo = $this->scoreRepository;
+        $this->template->chart = $cache->load('graf', 
+                                               function() use ($scoreRepo) {
+                                                    return $scoreRepo->findTimeStats(30,5);
+                                               }, 
+                                               array(
+                                                 Cache::EXPIRE => '+ 30 minutes', 
+                                               )
+                                             );
     }
     
     protected function createComponentCommitScoreForm()
