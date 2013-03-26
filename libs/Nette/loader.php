@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Nette Framework (version 2.0.7 released on 2012-11-28, http://nette.org)
+ * Nette Framework (version 2.0.10 released on 2013-03-08, http://nette.org)
  *
- * Copyright (c) 2004, 2012 David Grudl (http://davidgrudl.com)
+ * Copyright (c) 2004, 2013 David Grudl (http://davidgrudl.com)
  *
  * For the full copyright and license information, please view
  * the file license.txt that was distributed with this source code.
@@ -29,7 +29,7 @@ umask(0);
  */
 define('NETTE', TRUE);
 define('NETTE_DIR', __DIR__);
-define('NETTE_VERSION_ID', 20007); // v2.0.7
+define('NETTE_VERSION_ID', 20010); // v2.0.10
 define('NETTE_PACKAGE', '5.3');
 
 

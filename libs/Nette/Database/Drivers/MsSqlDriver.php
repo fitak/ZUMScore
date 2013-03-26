@@ -85,7 +85,6 @@ class MsSqlDriver extends Nette\Object implements Nette\Database\ISupplementalDr
 	 */
 	public function applyLimit(&$sql, $limit, $offset)
 	{
-		// offset support is missing
 		if ($limit >= 0) {
 			$sql = 'SELECT TOP ' . (int) $limit . ' * FROM (' . $sql . ') t';
 		}
@@ -116,7 +115,7 @@ class MsSqlDriver extends Nette\Object implements Nette\Database\ISupplementalDr
 	 */
 	public function getTables()
 	{
-		throw new NotImplementedException;
+		throw new Nette\NotImplementedException;
 	}
 
 
@@ -126,7 +125,7 @@ class MsSqlDriver extends Nette\Object implements Nette\Database\ISupplementalDr
 	 */
 	public function getColumns($table)
 	{
-		throw new NotImplementedException;
+		throw new Nette\NotImplementedException;
 	}
 
 
@@ -136,7 +135,7 @@ class MsSqlDriver extends Nette\Object implements Nette\Database\ISupplementalDr
 	 */
 	public function getIndexes($table)
 	{
-		throw new NotImplementedException;
+		throw new Nette\NotImplementedException;
 	}
 
 
@@ -146,7 +145,7 @@ class MsSqlDriver extends Nette\Object implements Nette\Database\ISupplementalDr
 	 */
 	public function getForeignKeys($table)
 	{
-		throw new NotImplementedException;
+		throw new Nette\NotImplementedException;
 	}
 
 

@@ -154,7 +154,7 @@ class FileStorage extends Nette\Object implements Nette\Caching\IStorage
 	{
 		$cacheFile = $this->getCacheFile($key);
 		if ($this->useDirs && !is_dir($dir = dirname($cacheFile))) {
-			@mkdir($dir, 0777); // @ - directory may already exist
+			@mkdir($dir); // @ - directory may already exist
 		}
 		$handle = @fopen($cacheFile, 'r+b'); // @ - file may not exist
 		if (!$handle) {
@@ -276,10 +276,10 @@ class FileStorage extends Nette\Object implements Nette\Caching\IStorage
 	 * @param  array  conditions
 	 * @return void
 	 */
-	public function clean(array $conds)
+	public function clean(array $conditions)
 	{
-		$all = !empty($conds[Cache::ALL]);
-		$collector = empty($conds);
+		$all = !empty($conditions[Cache::ALL]);
+		$collector = empty($conditions);
 
 		// cleaning using file iterator
 		if ($all || $collector) {
@@ -312,14 +312,14 @@ class FileStorage extends Nette\Object implements Nette\Caching\IStorage
 			}
 
 			if ($this->journal) {
-				$this->journal->clean($conds);
+				$this->journal->clean($conditions);
 			}
 			return;
 		}
 
 		// cleaning using journal
 		if ($this->journal) {
-			foreach ($this->journal->clean($conds) as $file) {
+			foreach ($this->journal->clean($conditions) as $file) {
 				$this->delete($file);
 			}
 		}

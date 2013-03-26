@@ -44,7 +44,15 @@ class ScoreRepository extends Repository {
         return $result;
     }
 
-    public function findTimeStats($users, $samples, $max_days) {
+    public function findTimeStats($samples = 30, $max_days = 5) {
+
+        $top = $this->findTop(30);
+        $top_users = $top->fetchAll();
+        foreach($top_users as $score) {
+            $users[] = $score->name;
+            if(count($users) == 5) break;
+        }
+
         list($min, $max) = $this->findDates();
 
         $times = array();

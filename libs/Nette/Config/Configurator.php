@@ -59,7 +59,7 @@ class Configurator extends Nette\Object
 	 */
 	public function setDebugMode($value = TRUE)
 	{
-		$this->parameters['debugMode'] = is_bool($value) ? $value : self::detectDebugMode($value);
+		$this->parameters['debugMode'] = is_bool($value) ? $value : static::detectDebugMode($value);
 		$this->parameters['productionMode'] = !$this->parameters['debugMode']; // compatibility
 		return $this;
 	}
@@ -84,7 +84,7 @@ class Configurator extends Nette\Object
 	{
 		$this->parameters['tempDir'] = $path;
 		if (($cacheDir = $this->getCacheDirectory()) && !is_dir($cacheDir)) {
-			mkdir($cacheDir, 0777);
+			mkdir($cacheDir);
 		}
 		return $this;
 	}
