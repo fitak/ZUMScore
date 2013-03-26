@@ -2,3 +2,4 @@
 /app/config/config.product.neon
 /temp/*
 /log/*
+/netbeans/*
