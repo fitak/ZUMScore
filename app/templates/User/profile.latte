@@ -24,7 +24,7 @@
                 <td>{$score["count(*)"]}</td>
                 <td>{$score->ref("score_id")->date|date: 'j. m. Y, H:i:s'}</td>
                 <td n:if="$user->isInRole('admin') || $user->getId() == $userId">
-                    <a class="btn btn-mini" n:href="Score:displayScore id=>$score->score_id">Uzly</a>
+                    <a class="btn btn-mini" n:href="Homepage:displayScore id=>$score->score_id">Uzly</a>
                 </td>
             </tr>
 </table>

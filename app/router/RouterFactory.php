@@ -19,6 +19,7 @@ class RouterFactory
 		$router = new RouteList();
 		$router[] = new Route('index.php', 'Homepage:default', Route::ONE_WAY);
 		$router[] = new Route('<presenter>/<action>[/<id>]', 'Homepage:default');
+		$router[] = new Route("commit/<token>/<apiversion>", "API:commit");
 		return $router;
 	}
 

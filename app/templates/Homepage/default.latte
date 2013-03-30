@@ -1,31 +1,47 @@
-{* This is the welcome page, you can delete it *}
-
 {block content}
-<!-- Main hero unit for a primary marketing message or call to action -->
-      <div class="hero-unit">
-        <h1>Hello, world!</h1>
-        <p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-        <p><a href="#" class="btn btn-primary btn-large">Learn more &raquo;</a></p>        
-        <a href="{link Sign:in}">Test</a>
-      </div>
+<div class="big-chart" id="chart_div">
+</div>
+<script type="text/javascript">
+      var data = [
+          ['Čas', {foreach $chart['users'] as $u}{$u}{sep},{/sep}{/foreach}],
+          {foreach $chart['times'] as $time}
+                [{Date('j.n. H\h',$time['date'])},{foreach $time['scores'] as $score}{!$score}{sep},{/sep}{/foreach}]
+                {sep},{/sep}
+          {/foreach}
+        ];
+        prepareChart('Výsledky','Čas',data);
+</script>
+<table n:ifset="$scores" class="table">
+    <tr>
+        <th>Uživatel</th>
+        <th>Počet uzlů</th>
+        <th>Kdy</th>
+        <th n:if="$user->isInRole('admin')">Operace</th>
+    </tr>
+    <tr n:foreach="$scores as $score" class="{if !$score->valid}error invalid-result{/if}">
+        <td><a n:href="User:profile id=>$score->user_id">{$score->name}</a></td>
+        <td>{$score->min_nodes_count}</td>
+        <td>{$score->date|date: 'j. m. Y, H:i:s'}</td>
+        <td n:if="$user->isInRole('admin')" class="text-center">
+            {if $score->valid}
+                <a class="btn btn-mini btn-warning" n:href="changeValidity! id=>$score->score_id">Invalidate</a>
+            {else}
+                <a class="btn btn-mini" n:href="changeValidity! id=>$score->score_id">Validate</a>
+            {/if}
+            <a class="btn btn-mini btn-danger" n:href="delete! id=>$score->score_id">Smazat</a>
+            <a class="btn btn-mini" n:href="displayScore id=>$score->score_id">Uzly</a>
+        </td>
+    </tr>
+</table>
 
-      <!-- Example row of columns -->
-      <div class="row">
-        <div class="span4">
-          <h2>Heading</h2>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          <p><a class="btn" href="#">View details &raquo;</a></p>
-        </div>
-        <div class="span4">
-          <h2>Heading</h2>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          <p><a class="btn" href="#">View details &raquo;</a></p>
-       </div>
-        <div class="span4">
-          <h2>Heading</h2>
-          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-          <p><a class="btn" href="#">View details &raquo;</a></p>
-        </div>
-      </div>
+<hr>
+<div class="text-center">
+    
 
-      <hr>
+    <div class="lead well">
+        {$baseUri}/commit/%token%/%apiversion%
+        <hr>
+        <a href="{$basePath}/files/ScoreCommit.zip" class="btn btn-large btn-success">Stáhnout knihovnu</a>
+    </div>
+    
+</div>
