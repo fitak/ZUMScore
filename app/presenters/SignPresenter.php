@@ -54,7 +54,7 @@ class SignPresenter extends BasePresenter
 			return;
 		}
 
-		$this->redirect('Score:');
+		$this->redirect('Homepage:');
 	}
 
         public function createComponentActivateForm()

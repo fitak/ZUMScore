@@ -18,7 +18,7 @@ class TokenPresenter extends BasePresenter
         parent::startup();
         $this->tokenRepository = $this->context->tokenRepository;
         
-        if(!$this->getUser()->isLoggedIn()) $this->redirect("Score:");
+        if(!$this->getUser()->isLoggedIn()) $this->redirect("Homepage:");
     }
     
     public function actionDefault()

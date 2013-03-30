@@ -91,7 +91,7 @@ class UserPresenter extends BasePresenter
         $this->usersRepository->changePassword($this->getUser()->getId(), $values->newPassword);
         
         $this->flashMessage("Heslo bylo změněno.");
-        $this->redirect("Score:");
+        $this->redirect("Homepage:");
     }
     
 }
