@@ -44,4 +44,21 @@ class BaseScoreList extends Control
         return $this->scoreRepository;
     }
     
+    public function handleChangeValidity($id)
+    {
+        if($this->getPresenter()->getUser()->isInRole("admin"))
+        {
+            $this->scoreRepository->changeState($id);
+            $this->getPresenter()->flashMessage("Validace byla změněna");
+        }
+    }
+    
+    public function handleDelete($id)
+    {
+        if($this->getPresenter()->getUser()->isInRole("admin"))
+        {
+            $this->scoreRepository->delete($id);
+            $this->getPresenter()->flashMessage("Skóre bylo smazáno");
+        }
+    }
 }
