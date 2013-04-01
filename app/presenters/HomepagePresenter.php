@@ -52,29 +52,13 @@ class HomepagePresenter extends BasePresenter
     
     public function renderDefault()
     {
-        $this->template->scores = $this->scoreRepository->findTop(30)->fetchAll();
-
-        $cache = new Cache($this->context->cacheStorage, 'graf');
-        $scoreRepo = $this->scoreRepository;
-        $this->template->chart = $cache->load('graf', 
-                                               function() use ($scoreRepo) {
-                                                    return $scoreRepo->findTimeStats(30,5);
-                                               }, 
-                                               array(
-                                                 Cache::EXPIRE => '+ 30 minutes', 
-                                               )
-                                             );
     }
     
-    protected function createComponentCommitScoreForm()
+    protected function createComponentCommitScoreForm($name)
     {
-        $form = new UI\Form();
+        $form = new CommitScoreForm($this, $name);
 
         $form->setRenderer(new Kdyby\BootstrapFormRenderer\BootstrapRenderer());
-
-        $form->addTextArea("nodes", "Seznam uzlů oddělený čárkami")->setAttribute('style', 'width: 95%;');
-        
-        $form->addSubmit('commit', 'Commit!')->setAttribute('class', 'btn btn-primary btn-large');
         $form->onSuccess[] = callback($this, 'commitScoreSuccess');
         return $form;
     }
