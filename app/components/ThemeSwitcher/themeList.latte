@@ -1,0 +1,7 @@
+<div class="btn-group">
+{foreach $themeList as $key=>$value}
+
+    <a n:href="switchTheme, themeName=>$key" class="btn">{$value}</a>
+
+{/foreach}
+</div>

@@ -14,5 +14,22 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
     {
         parent::startup();
         $this->scoreRepository = $this->context->scoreRepository;
+        
+        $themeName = NULL;
+        
+        if($this->session->hasSection('theme'))
+        {
+            $theme = $this->getSession('theme');
+            $themeName = $theme->themeName;
+        }
+        
+        $this->template->themeName = $themeName;
+    }
+    
+    public function createComponentThemeSwitcher()
+    {
+        $control = new ThemeSwitcher(array(NULL=>"Basic", "amelia"=>"Amelia", "cosmo"=>"Cosmo"));
+        
+        return $control;
     }
 }
