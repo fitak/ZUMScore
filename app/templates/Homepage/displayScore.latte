@@ -5,7 +5,7 @@
 <div class="container">
     <div class="well" n:ifset="$nodes">
         {foreach $nodes as $node}
-            {$node->node_id}{if !$iterator->isLast()}, {/if}
+            {$node->node_id}{sep}, {/sep}
         {/foreach}
     </div>
 </div>
