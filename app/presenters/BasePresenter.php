@@ -28,7 +28,11 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
     
     public function createComponentThemeSwitcher()
     {
-        $control = new ThemeSwitcher(array(NULL=>"Basic", "amelia"=>"Amelia", "cosmo"=>"Cosmo"));
+        $control = new ThemeSwitcher(array(
+            NULL=>"Basic",
+            "amelia"=>"Amelia",
+            "cosmo"=>"Cosmo",
+            "readable"=>"Readable"));
         
         return $control;
     }
