@@ -46,6 +46,28 @@ class UserPresenter extends BasePresenter
         
     }
     
+    public function createComponentResetPasswordForm($name)
+    {
+        $form = new ResetPasswordForm($this, $name);       
+        $form->setRenderer(new Kdyby\BootstrapFormRenderer\BootstrapRenderer());        
+        
+        $form->onSuccess[] = callback($this, "passwordResetSuccess");
+        return $form;
+    }
+    
+    public function passwordResetSuccess(UI\Form $form)
+    {
+        $values = $form->getValues();
+        
+        $subject = "Reset hesla ZUM Score";
+        //$body = 
+        $mail = $this->usersRepository->sendMailToUser($id, $subject, $body);
+    
+        if($mail)
+            $this->flashMessage('Postup byl odeslán na email.'); else
+                $this->flashMessage ('Email se nepodařilo odeslat.', 'error');
+    }
+    
     public function createComponentChangePasswordForm()
     {
         $form = new UI\Form();

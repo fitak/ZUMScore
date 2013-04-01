@@ -51,4 +51,17 @@ class UsersRepository extends Repository
         
         return($user);
     }
+    
+    public function sendMailToUser($id, $subject, $body)
+    {
+        $email = $this->findBy(array('id'=>$id))->mail;
+        
+        if(!$email)
+        {
+            return false;
+        } else
+        {
+            return \mail($email, $subject, $body);
+        }
+    }
 }
