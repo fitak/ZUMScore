@@ -47,7 +47,7 @@ class ScorePresenter extends BasePresenter
     {
         $this->template->scores = $this->scoreRepository->findTop(30)->fetchAll();
 
-        /* $cache = new Cache($this->context->cacheStorage, 'graf');
+        $cache = new Cache($this->context->cacheStorage, 'graf');
         $scoreRepo = $this->scoreRepository;
         $this->template->chart = $cache->load('graf', 
                                                function() use ($scoreRepo) {
@@ -56,8 +56,8 @@ class ScorePresenter extends BasePresenter
                                                array(
                                                  Cache::EXPIRE => '+ 30 minutes', 
                                                )
-                                             ); */
-        $this->template->chart = NULL;//$this->scoreRepository->findTimeStats(30,5);
+                                             );
+        //$this->template->chart = NULL;//$this->scoreRepository->findTimeStats(30,5);
     }
     
     protected function createComponentCommitScoreForm()
