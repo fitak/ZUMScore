@@ -100,11 +100,5 @@ class UserPresenter extends BasePresenter
         return $control;
     }
     
-    public function createComponentUserScoreList() {
-        $control = new \UserScoreList($this->usersRepository, $this->scoreRepository);
-        
-        return $control;
-    }
-    
 }
 ?>

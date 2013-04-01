@@ -114,5 +114,12 @@ class HomepagePresenter extends BasePresenter
         $this->redirect("Homepage:");
     }
     
+    public function createComponentScoreOverview()
+    {
+        $control = new ScoreOverview($this->usersRepository, $this->scoreRepository);
+        
+        return $control;
+    }
+    
 }
 ?>

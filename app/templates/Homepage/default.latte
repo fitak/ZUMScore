@@ -1,38 +1,6 @@
 {block content}
-<div class="big-chart" id="chart_div">
-</div>
-<script type="text/javascript">
-      var data = [
-          ['Čas', {foreach $chart['users'] as $u}{$u}{sep},{/sep}{/foreach}],
-          {foreach $chart['times'] as $time}
-                [{Date('j.n. H\h',$time['date'])},{foreach $time['scores'] as $score}{!$score}{sep},{/sep}{/foreach}]
-                {sep},{/sep}
-          {/foreach}
-        ];
-        prepareChart('Výsledky','Čas',data);
-</script>
-<table n:ifset="$scores" class="table">
-    <tr>
-        <th>Uživatel</th>
-        <th>Počet uzlů</th>
-        <th>Kdy</th>
-        <th n:if="$user->isInRole('admin')">Operace</th>
-    </tr>
-    <tr n:foreach="$scores as $score" class="{if !$score->valid}error invalid-result{/if}">
-        <td><a n:href="User:profile id=>$score->user_id">{$score->name}</a></td>
-        <td>{$score->min_nodes_count}</td>
-        <td>{$score->date|date: 'j. m. Y, H:i:s'}</td>
-        <td n:if="$user->isInRole('admin')" class="text-center">
-            {if $score->valid}
-                <a class="btn btn-mini btn-warning" n:href="changeValidity! id=>$score->score_id">Invalidate</a>
-            {else}
-                <a class="btn btn-mini" n:href="changeValidity! id=>$score->score_id">Validate</a>
-            {/if}
-            <a class="btn btn-mini btn-danger" n:href="delete! id=>$score->score_id">Smazat</a>
-            <a class="btn btn-mini" n:href="displayScore id=>$score->score_id">Uzly</a>
-        </td>
-    </tr>
-</table>
+
+{control scoreOverview}
 
 <hr>
 <div class="text-center">
