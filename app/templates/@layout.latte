@@ -4,7 +4,7 @@
     <title>ZUM Score</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
-    <link href="{$baseUri}/public/bootstrap/css/bootstrap_cosmo.css" rel="stylesheet">
+    <link href="{$baseUri}/public/bootstrap/css/bootstrap{ifset $themeName}_{$themeName}{/ifset}.css" rel="stylesheet">
     <link href="{$baseUri}/public/css/additional.css" rel="stylesheet">
     <style type="text/css">
       body {
@@ -38,8 +38,8 @@
                   <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="https://github.com/janzal/ZUMScore">Repozitář</a></li>
-                    <li><a href="https://github.com/janzal/ZUMScore/issues">Issue tracker</a></li>
+                    <li><a href="https://github.com/fitak/ZUMScore">Repozitář</a></li>
+                    <li><a href="https://github.com/fitak/ZUMScore/issues">Issue tracker</a></li>
                 </ul>
               </li>
               
@@ -88,12 +88,11 @@
       {block #content}{/block}
 
       <footer class="footer">
-        <p>&copy; BI-ZUM 2013</p>
+        {control themeSwitcher}
+        <p>&copy; BI-ZUM 2014</p>
       </footer>
 
     </div> <!-- /container -->
-
-    
     
     <script src="{$baseUri}/public/js/jquery.js"></script>
     <script src="{$baseUri}/public/js/netteForms.js"></script>
