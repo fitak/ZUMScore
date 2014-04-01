@@ -1,4 +1,6 @@
 <?php
+// ini_set('memory_limit', '64M');
+
 // Uncomment this line if you must temporarily take down your site for maintenance.
 // require '.maintenance.php';
 

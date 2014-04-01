@@ -94,11 +94,17 @@ class ScoreRepository extends Repository {
         return array(strtotime($dates->min), strtotime($dates->max));
     }
 
-    protected function removeEdges($nodeId, &$edges) {
-        foreach ($edges as $key => $value) {
-            if ($value['from_id'] == $nodeId || $value['to_id'] == $nodeId)
-                unset($edges[$key]);
+    protected function removeEdges($nodeId, &$fEdges, &$tEdges) {
+        if(isset($fEdges[$nodeId])) {
+            unset($tEdges[$fEdges[$nodeId]]);
+            unset($fEdges[$nodeId]);
+            return;
         }
+
+        if(isset($tEdges[$nodeId])) {
+            unset($fEdges[$tEdges[$nodeId]]);
+            unset($tEdges[$nodeId]);
+        }        
     }
 
     protected function checkScore($score) {
@@ -108,25 +114,28 @@ class ScoreRepository extends Repository {
         $edges = $this->connection->table('edge')->limit($limit, $offset);
         $offset += $limit;
 
-        $spare_edges = array();
+        $spare_edges_count = 0;
 
         while(count($edges)) {
             $edges = $this->connection->table('edge')->limit($limit, $offset);
 
             $fEdges = array();
+            $tEdges = array();
             foreach ($edges as $edge) {
-                $fEdges[$edge->id] = array("from_id" => $edge->from_id, "to_id" => $edge->to_id);
+                $fEdges[$edge->from_id] = $edge->to_id;
+                $tEdges[$edge->to_id] = $edge->from_id;
             }
 
             foreach ($score as $node) {
-                $this->removeEdges($node, $fEdges);
+                $this->removeEdges($node, $fEdges, $tEdges);
             }
-                
-            $spare_edges = array_merge($spare_edges, $fEdges);
+
+            $spare_edges_count += count($fEdges);
+
             $offset += $limit;
         }
 
-        return $spare_edges;
+        return $spare_edges_count;
     }
 
     public function commitScore($userId, $score) {
@@ -136,8 +145,8 @@ class ScoreRepository extends Repository {
             throw new \ZUMStats\Exceptions\TooMuchNodesException("Moc uzlu - " . $nodesCount);
 
         $checkScore = $this->checkScore($score);
-        if (count($checkScore) != 0)
-            throw new \ZUMStats\Exceptions\InvalidScoreException("Nebylo pokryto " . count($checkScore) . " hran.", $checkScore);
+        if ($checkScore != 0)
+            throw new \ZUMStats\Exceptions\InvalidScoreException("Nebylo pokryto " . $checkScore . " hran.");
 
         $this->getTable()->insert(array("user_id" => $userId, "date" => new Nette\DateTime()));
         $scoreId = $this->connection->lastInsertId();
