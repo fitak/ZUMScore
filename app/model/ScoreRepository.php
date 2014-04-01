@@ -48,9 +48,16 @@ class ScoreRepository extends Repository {
 
         $top = $this->findTop(30);
         $top_users = $top->fetchAll();
+
+        $users = array();
+
         foreach($top_users as $score) {
             $users[] = $score->name;
             if(count($users) == 5) break;
+        }
+
+        if(!count($users)) {
+            return array('users' => array(), 'times' => array());
         }
 
         list($min, $max) = $this->findDates();
@@ -95,18 +102,31 @@ class ScoreRepository extends Repository {
     }
 
     protected function checkScore($score) {
-        $edges = $this->connection->table('edge');
+        $offset = 0;
+        $limit = 1000;
 
-        $fEdges = array();
-        foreach ($edges as $edge) {
-            $fEdges[$edge->id] = array("from_id" => $edge->from_id, "to_id" => $edge->to_id);
+        $edges = $this->connection->table('edge')->limit($limit, $offset);
+        $offset += $limit;
+
+        $spare_edges = array();
+
+        while(count($edges)) {
+            $edges = $this->connection->table('edge')->limit($limit, $offset);
+
+            $fEdges = array();
+            foreach ($edges as $edge) {
+                $fEdges[$edge->id] = array("from_id" => $edge->from_id, "to_id" => $edge->to_id);
+            }
+
+            foreach ($score as $node) {
+                $this->removeEdges($node, $fEdges);
+            }
+                
+            $spare_edges = array_merge($spare_edges, $fEdges);
+            $offset += $limit;
         }
 
-        foreach ($score as $node) {
-            $this->removeEdges($node, $fEdges);
-        }
-
-        return $fEdges;
+        return $spare_edges;
     }
 
     public function commitScore($userId, $score) {
